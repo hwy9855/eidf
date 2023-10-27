@@ -709,10 +709,7 @@ class RagAEForGeneration(RagPreTrainedModel):
 
         eps = self.config.label_smoothing
         target = torch.zeros_like(rac_scores) + eps
-        if bsz > 1:
-            target = target.fill_diagonal_(1 - eps).to(rac_scores.device)
-        else:
-            target = (torch.zeros_like(rac_scores) + 1 - eps).to(rac_scores.device)
+        target = target.fill_diagonal_(1 - eps).to(rac_scores.device)
 
         rac_loss = torch.sum(self.rac_loss_fn(self.rac_layernorm(rac_scores), target), dim=-1)
 
@@ -806,7 +803,7 @@ class RagAEForGeneration(RagPreTrainedModel):
             )
             losses.append(dks_loss)
 
-        if labels is not None and (self.config.ragae_type == 'rac' or self.config.ragae_type == 'mt'):
+        if labels is not None and labels.shape[0] > 1 and (self.config.ragae_type == 'rac' or self.config.ragae_type == 'mt'):
             rac_loss = self._get_rac_loss(
                 labels,
                 outputs.retrieved_doc_embeds,
