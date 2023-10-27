@@ -46,8 +46,8 @@ def main(args):
     for params in sba.named_parameters():
         print(params[0])
 
-    train_data_raw = load_raw_data('../rag/msmarco/train.target')
-    val_data_raw = load_raw_data('../rag/msmarco/val.target')
+    train_data_raw = load_raw_data(args.data_dir + 'train.target')
+    val_data_raw = load_raw_data(args.data_dir + 'val.target')
 
     curr_patience = 0
     curr_best_val_loss = 1e7
@@ -103,6 +103,11 @@ def main(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
+    parser.add_argument(
+        "--data_dir",
+        type=str,
+        default="../ragae/msmarco/"
+    )
     parser.add_argument(
         "--epochs",
         type=int,
