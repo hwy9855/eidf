@@ -804,7 +804,7 @@ class RagAEForGeneration(RagPreTrainedModel):
             )
             losses.append(dks_loss)
 
-        if labels is not None and (self.config.ragk_type == 'rac' or self.config.ragk_type == 'mt'):
+        if labels is not None and (self.config.ragae_type == 'rac' or self.config.ragae_type == 'mt'):
             rac_loss = self._get_rac_loss(
                 labels,
                 outputs.retrieved_doc_embeds,
