@@ -157,7 +157,7 @@ class GenerativeQAModule(BaseTransformer):
                     hparams.model_name_or_path, hparams.actor_handles, config=config
                 )
             model = self.model_class.from_pretrained(hparams.model_name_or_path, config=config, retriever=retriever)
-            if hparams.ragk_type == "full" or hparams.ragk_type == "sba":
+            if hparams.ragae_type == "dks" or hparams.ragae_type == "mt":
                 model.set_sba(hparams.sba_path)
             prefix = config.question_encoder.prefix
         else:
@@ -165,7 +165,7 @@ class GenerativeQAModule(BaseTransformer):
                 config.prefix = hparams.prefix
             hparams, config = set_extra_model_params(extra_model_params, hparams, config)
             model = self.model_class.from_pretrained(hparams.model_name_or_path, config=config)
-            if hparams.ragk_type == "full" or hparams.ragk_type == "sba":
+            if hparams.ragae_type == "dks" or hparams.ragae_type == "mt":
                 model.set_sba(hparams.sba_path)
             prefix = config.prefix
 
