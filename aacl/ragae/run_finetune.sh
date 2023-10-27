@@ -13,7 +13,7 @@ ray start --head
 # A sample finetuning run, you need to specify data_dir, output_dir and model_name_or_path
 # run ./examples/rag/finetune_rag_ray.sh --help to see all the possible options
 
-python finetune_ragae.py \
+python finetune.py \
     --data_dir $DATA_DIR \
     --output_dir $OUTPUT_DIR \
     --model_name_or_path $MODEL_NAME_OR_PATH \

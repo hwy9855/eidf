@@ -160,14 +160,10 @@ class Seq2SeqDatasetAAP(Dataset):
         src_lang=None,
         tgt_lang=None,
         prefix="",
-        neg_sample_nums=64,
     ):
         super().__init__()
         self.src_file = Path(data_dir).joinpath(type_path + ".source")
         self.tgt_file = Path(data_dir).joinpath(type_path + ".target")
-        self.aap_file = Path(data_dir).joinpath(type_path + ".target")
-        # self.neg_file = Path(data_dir).joinpath(type_path + ".neg")
-        self.rep_file = Path(data_dir).joinpath(type_path + ".reps")
         self.src_lens = self.get_char_lens(self.src_file)
         self.max_source_length = max_source_length
         self.max_target_length = max_target_length
@@ -178,16 +174,7 @@ class Seq2SeqDatasetAAP(Dataset):
             self.src_lens = self.src_lens[:n_obs]
         self.src_lang = src_lang
         self.tgt_lang = tgt_lang
-        with open(self.rep_file, 'rb') as f:
-            self.ans_reps = pk.load(f)
-        self.answers = self._load_answers()
-        self.neg_sample_nums = neg_sample_nums
-
-    def _load_answers(self):
-        with open(self.aap_file, 'r') as f:
-            lines = f.read().splitlines()
-        return lines
-
+        
     def __len__(self):
         return len(self.src_lens)
 
