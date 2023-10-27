@@ -708,9 +708,11 @@ class RagAEForGeneration(RagPreTrainedModel):
         rac_scores = torch.sum(rac_scores * doc_probs, dim=1).squeeze(-1)
 
         eps = self.config.label_smoothing
-
         target = torch.zeros_like(rac_scores) + eps
-        target = target.fill_diagonal_(1 - eps).to(rac_scores.device)
+        if bsz > 1:
+            target = target.fill_diagonal_(1 - eps).to(rac_scores.device)
+        else:
+            target = (torch.zeros_like(rac_scores) + 1 - eps).to(rac_scores.device)
 
         rac_loss = torch.sum(self.rac_loss_fn(self.rac_layernorm(rac_scores), target), dim=-1)
 
