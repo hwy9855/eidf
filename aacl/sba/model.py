@@ -208,6 +208,7 @@ class SBA(nn.Module):
         :return: [sba_representation, word_logits]
         '''
         assert (is_train and run_decode or not is_train)
+        print(input_ids.shape)
         input_ids = input_ids.squeeze(1)
         attention_mask = attention_mask.squeeze(1)
         hidden_states = self.pretrained_LM(input_ids=input_ids, attention_mask=attention_mask)[0].detach().clone()
