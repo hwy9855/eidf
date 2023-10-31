@@ -1,4 +1,4 @@
-python eval_rag.py \
+python eval.py \
     --model_name_or_path ragae_mt/checkpoint5 \
     --model_type ragae \
     --evaluation_set msmarco/val.source \
@@ -15,7 +15,7 @@ python eval_rag.py \
     --index_path msmarco_ks/my_knowledge_dataset_hnsw_index.faiss \
     --recalculate
 
-python eval_rag.py \
+python eval.py \
     --model_name_or_path ragae_mt/checkpoint5 \
     --model_type ragae \
     --evaluation_set msmarco/val.source \
