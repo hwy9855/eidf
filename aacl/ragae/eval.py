@@ -34,10 +34,10 @@ ROUGE = ROUGEScore()
 
 
 def infer_model_type(model_name_or_path):
-    if "token" in model_name_or_path:
-        return "rag_token"
-    if "sequence" in model_name_or_path:
-        return "rag_sequence"
+    if "ragae" in model_name_or_path:
+        return "ragae"
+    if "rag" in model_name_or_path:
+        return "rag"
     if "bart" in model_name_or_path:
         return "bart"
     return None
@@ -170,10 +170,10 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--model_type",
-        choices=["rag_sequence", "rag_token", "bart"],
+        choices=["rag", "ragae", "bart"],
         type=str,
         help=(
-            "RAG model type: rag_sequence, rag_token or bart, if none specified, the type is inferred from the"
+            "RAG model type: rag, ragae or bart, if none specified, the type is inferred from the"
             " model_name_or_path"
         ),
     )

@@ -1,0 +1,33 @@
+python eval_rag.py \
+    --model_name_or_path ragae_mt/checkpoint5 \
+    --model_type ragae \
+    --evaluation_set msmarco/val.source \
+    --gold_data_path msmarco/val.target \
+    --predictions_path ragae_mt/e2e_preds.txt \
+    --eval_mode e2e \
+    --gold_data_mode qa \
+    --n_docs 10 \
+    --max_length 100 \
+    --print_predictions \
+    --print_docs \
+    --index_name custom \
+    --passages_path msmarco_ks/my_knowledge_dataset \
+    --index_path msmarco_ks/my_knowledge_dataset_hnsw_index.faiss \
+    --recalculate
+
+python eval_rag.py \
+    --model_name_or_path ragae_mt/checkpoint5 \
+    --model_type ragae \
+    --evaluation_set msmarco/val.source \
+    --gold_data_path msmarco/val.target \
+    --predictions_path ragae_mt/e2e_retrieval.txt \
+    --eval_mode retrieval \
+    --gold_data_mode qa \
+    --n_docs 10 \
+    --max_length 100 \
+    --print_predictions \
+    --print_docs \
+    --index_name custom \
+    --passages_path msmarco_ks/my_knowledge_dataset \
+    --index_path msmarco_ks/my_knowledge_dataset_hnsw_index.faiss \
+    --recalculate
