@@ -118,4 +118,3 @@ class Seq2SeqLoggingCallback(pl.Callback):
     def on_validation_end(self, trainer: pl.Trainer, pl_module):
         save_json(pl_module.metrics, pl_module.metrics_save_path)
         # Uncommenting this will save val generations
-        # return self._write_logs(trainer, pl_module, "valid")
